@@ -1,6 +1,6 @@
 # JS Basics
 
-Data Types in JS:
+## Data Types in JS:
 
 -   Primitives / Value types
     -   Number
@@ -15,7 +15,7 @@ Data Types in JS:
         -   built-in objects (Array, Function, Map, Set, etc.)
         -   user defined objects
 
-Operators in JS:
+## Operators in JS:
 
 -   Arithmetic
     -   addition (+)
@@ -53,12 +53,12 @@ We use _operators_ to create _expression_ and with this expressions we can imple
 
 `operators -> expression -> algorithms`
 
-Conditional Statements:
+## Conditional Statements:
 
 -   if...else
 -   switch...case
 
-Loops:
+## Loops:
 
 -   for
 -   while
@@ -80,7 +80,7 @@ In JavaScript, an object is a standalone entity, with properties and type.
 
 ---
 
-There are different ways to create new objects:
+### There are different ways to create new objects:
 
 -   Create a single object, using an object initializer (object literal).
     -   Object initializers are also called object literals
@@ -91,7 +91,7 @@ There are different ways to create new objects:
 
 ---
 
-Ways to access property of an Object:
+### Ways to access property of an Object:
 
 -   Dot Notation
 
@@ -273,7 +273,9 @@ const another = Object.assign({}, circle);
 const another = { ...circle };
 ```
 
-Garbage collector:
+---
+
+## Garbage collector:
 
 **In low level languages like C or C++, when creating an object, we need to allocate memory to it, and when we're done we need to deallocate memory.**
 
@@ -295,7 +297,7 @@ So based on some complex algorithms, this garbage collector runs in the backgrou
 
 ## Arrays
 
-Array operations:
+### Array operations:
 
 -   Adding Elements (+)
 -   Removing Elements (❌ -)
@@ -309,7 +311,7 @@ Array operations:
 -   Mapping an Array
 -   Reducing an Array
 
-Adding Elements:
+#### Adding Elements:
 
 -   End
     -   using `push()` method
@@ -333,7 +335,7 @@ numbers.splice(2, 0, "a", "b");
 // [1, 2, 'a', 'b', 3, 4, 5, 6]
 ```
 
-Removing Elements:
+#### Removing Elements:
 
 -   End
     -   using `pop()` method
@@ -360,7 +362,7 @@ const middle = numbers2.splice(2, 2);
 console.log(middle, numbers2);
 ```
 
-Finding Elements:
+#### Finding Elements:
 
 -   Finding primitives
     -   indexOf
@@ -394,7 +396,7 @@ const courseIndex = courses.findIndex(function (course) {
 console.log(course, courseIndex);
 ```
 
-Emptying an Array:
+#### Emptying an Array:
 
 -   `numbers = [];`
 -   `numbers.length = 0;`
@@ -441,7 +443,7 @@ const another = numbers;
 console.log(numbers, another);
 ```
 
-Combining and Slicing:
+#### Combining and Slicing:
 
 -   concat
 -   slice
@@ -464,7 +466,7 @@ const sliced = [...combined];
 console.log(combined, sliced);
 ```
 
-Iterating an Array:
+#### Iterating an Array:
 
 -   while
 -   do-while
@@ -473,7 +475,7 @@ Iterating an Array:
 -   for-of
 -   forEach
 
-Sorting Arrays:
+#### Sorting Arrays:
 
 ```js
 const numbers = [2, 3, 1];
@@ -514,7 +516,7 @@ courses.sort((a, b) => {
 console.log(courses);
 ```
 
-Testing the elements:
+#### Testing the elements:
 
 -   every
 -   some
@@ -534,7 +536,7 @@ const atLeatOnePositive = numbers.some((value) => value <= 0);
 console.log(allPositive, atLeatOnePositive);
 ```
 
-Filtering elements:
+#### Filtering elements:
 
 ```js
 const numbers = [1, -1, 2, 3];
@@ -544,7 +546,7 @@ const filtered = numbers.filter((value) => value >= 0);
 console.log(filtered);
 ```
 
-Mapping an Array:
+#### Mapping an Array:
 
 `filter` and `map` don't modify the original array.  
 These methods are chainable.
@@ -565,7 +567,7 @@ const items = numbers
 console.log(items);
 ```
 
-Reducing an Array:
+#### Reducing an Array:
 
 Reduce is like a blender.
 It blends everything into a single value.
@@ -603,7 +605,7 @@ console.log(sum, sum1);
 
 ## Functions
 
-Ways to define a function:
+### Ways to define a function:
 
 -   Function Declaration
 
@@ -650,7 +652,8 @@ function sum() {
 console.log(sum(1, 2, 3));
 ```
 
-Rest operator:
+### Rest operator:
+
 If you want to have a function with varying number of parameters, you can use the rest operator.
 
 **Rest operator** is different to spread operator.
@@ -668,7 +671,7 @@ console.log(sum(0.1, 20, 30));
 
 ---
 
-Getter and Setter:
+### Getter and Setter:
 
 ```js
 const person = {
@@ -696,7 +699,7 @@ console.log(person);
 
 When we need to add error handling, typically at the beginning of a function or method, this is what we call **defensive** programming.
 
-basic of error handling in js:
+### basic of error handling in js:
 
 ```js
 const person = {
@@ -728,7 +731,7 @@ console.log(person);
 
 ---
 
-The "this" keyword:
+## The "this" keyword:
 
 What is this?
 
@@ -769,7 +772,7 @@ function Video(title) {
 const v = new Video("a");
 ```
 
-Callback function (regular function) and _this_:
+### Callback function (regular function) and _this_:
 
 ```js
 const video = {
@@ -795,7 +798,7 @@ const video = {
 video.showTags();
 ```
 
-Changing the value of "_this_":
+### Changing the value of "_this_":
 
 -   Define self
 -   using `call()` method
