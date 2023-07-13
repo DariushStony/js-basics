@@ -1,10 +1,122 @@
-# JS Basics
+# JS
+
+JavaScript is a programming language initially designed to interact with elements of web pages.  
+In web browsers, JavaScript consists of three main parts:
+
+-   ECMAScript provides the core functionality.
+-   The Document Object Model (DOM) provides interfaces for interacting with elements on web pages
+-   The Browser Object Model (BOM) provides the browser API for interacting with the web browser.
+
+## JavaScript Syntax
+
+-   Whitespace  
+    Whitespace refers to characters that provide the space between other characters.
+    -   Carriage return
+    -   Space
+    -   New Line
+    -   Tab
+-   Statements  
+    A statement is a code the declares a variable or **instructs the JS engine to do a task**.
+    Statements terminate with semicolon (;)
+-   Blocks  
+    A block is a sequence of zero or more simple statements.
+    A block is delimited by a pair or curly brackets ({})
+-   Identifiers  
+    An identifier is a name you choose for variables, parameters, functions, classes, etc.
+    An identifier name starts with (a-z, A-Z, _, \$) and followed by (a-z, A-Z, 0-9, _, \$)
+-   Comments  
+    Comments allow you to add notes or hints to JavaScript code
+    -   Single-line comments (//)
+    -   Block comments (/\* \*/)
+-   Expressions  
+    An expression is a piece of code that **evaluates to a value**.  
+    ex. 2 + 1
+-   Keywords & Reserved words  
+    JavaScript defines a list of reserved keywords that have specific uses. Therefore, you cannot use the reserved keywords as identifiers or property names by rules.
+
+Expressions => returns a value
+
+```js
+// Expressions examples
+123;
+1 + 1;
+("hello");
+true;
+[1, 2, 3];
+// ternary operator
+isAlive ? 1 : 0;
+// IIFE
+(function () {})();
+```
+
+Statements => complete task instruction
+
+```js
+// Statements examples
+function test() {}
+if(isAlive === 1) {}
+for(){}
+let variable = (isAlive + 2) * 4;
+```
+
+#### A Point about react
+
+In react you can use **expressions** inside the `{}`.  
+You _cannot_ use **statements** inside the `{}`;
+
+```jsx
+function App() {
+    return (
+        <div>
+            {/* 
+                Inside here we can use expressions
+                and this is why we can use ternary operator here
+                but we cannot put in an if statement
+            */}
+            <p>{1 + 1}</p>
+        </div>
+    );
+}
+```
+
+## Variables
+
+A variable is a label that references a value.
+
+**Choose the right keyword for defining a variable**
+
+-   `var` (not recommended)
+-   `let`
+-   `const`
+
+**Variable definition has two steps**:
+
+1. Declaration  
+   ex. `let message;`
+
+2. Initialization
+
+    ```js
+    let message;
+    message = "Hello";
+
+    // Declare and  initialize at the same time
+    let variabledName = value;
+    ```
+
+By default, when a variable is declared but not initialized, it is assigned the value of undefined.
 
 ## Data Types in JS:
 
 -   Primitives / Value types
     -   Number
-    -   String
+        -   Integer
+        -   Floating-point
+        -   NaN
+        -   Ocatal
+        -   Hexadecimal
+        -   Binary
+    -   String (JavaScript string are immutable)
     -   Boolean
     -   undefined (it's a type and aslo a value)
     -   null (it's type is object and that's a bug in js)
@@ -14,6 +126,130 @@
     -   Object
         -   built-in objects (Array, Function, Map, Set, etc.)
         -   user defined objects
+
+JavaScript is a dynamically typed language. It means that a variable doesn’t associate with a type. In other words, a variable can hold a value of different types.
+
+### Numbers:
+
+-   Integer  
+    `let counter = 100;`
+-   Floating-point  
+    `let price = 9.99;`
+-   Octal  
+    `let num = 0o71;`
+-   Hexadecimal  
+    `let num = 0x1a;`
+-   Binary  
+    `let binNum = 0b111;`
+
+The numeric separator allows you to create a visual separation between groups of digits by using underscores (\_) as separators.  
+`const budget = 1_000_000_000;`
+
+### Booleans:
+
+JavaScript boolean type has two literal values `true` and `false`.  
+You can use the `Boolean()` function to cast a non-boolean values to a boolean value.  
+Some statements automatically and implicitly cast a non-boolean value to a boolean value using `Boolean()` function.
+
+For example, the `if` statement executes a block if a condition is `true`.  
+If you use a non-boolean value, it'll use the `Boolean()` function to implicilty cast the value to a boolean value.
+
+```js
+let error = "An error occurred";
+
+if (error) {
+    console.log(error);
+}
+```
+
+In this example, since the error variable holds a non-empty string, the if statement evaluates its value to true. Therefore, it executes the console.log(error) to output the error to the console.
+
+### Strings:
+
+JavaScript strings are primitive values. Also, strings are immutable. It means that if you modify a string, you will always get a new string. The original string doesn’t change.
+
+-   JavaScript strings are primitive values and immutable.
+-   Literal strings are delimited by single quotes ('), double quotes ("), or backticks (`).
+-   The length property returns the length of the string.
+-   Converting values to string  
+    Note that the `toString()` method doesn’t work for `undefined` and `null`.
+    -   `String(n)`
+    -   `'' + n`
+    -   `n.toString()`
+-   Use the comparison operators `>, >=, <, <=, == to compare string  
+    The comparison operators compare strings based on the numeric values of the characters. (ASCII)
+
+### Symbols:
+
+JavaScript added a primitive type in ES6: the symbol. Different from other primitive types, **the symbol type does not have a literal form**.  
+ The Symbol function creates a new unique value every time you call it.
+
+```js
+let s1 = Symbol();
+console.log(Symbol() == Symbol()); // false
+```
+
+## Primitive wrapper types:
+
+JavaScript provides three primitive wrapper types: Boolean, Number, and String types.
+
+The primitive wrapper types make it easier to use primitive values including booleans, numbers, and strings.
+
+```js
+let language = "JavaScript";
+let s = language.substring(4);
+console.log(s); // Script
+```
+
+In this example, The variable `language` holds a primitive string value. It **doesn’t have any method** like `substring()`. However, the above code works perfectly.
+
+When you call a method on a variable that holds a number, a string, or a boolean, JavaScript performs the following steps behind the scenes:
+
+-   Create an object of a corresponding type.
+-   Call a specific method on the instance.
+-   Delete the instance immediately.
+
+So the above code is technically equivalent to the following code:
+
+```js
+let language = "JavaScript";
+// behind the scenes of the language.substring(4);
+let temp = new String(language);
+let str = temp.substring(4);
+temp = null;
+```
+
+So why not use `String`, `Number` and `Boolean` as reference types instead of primitive types?
+
+When you create an object of a reference type using the new operator, the object will stay in the memory until it goes out of scope.
+
+The following variable `language` will stay on the heap until it goes out of the scope:
+
+```js
+let language = new String("JavaScript");
+console.log(language);
+```
+
+However, an automatically created primitive wrapper object exists for one line of code only. See the following example:
+
+```js
+let langName = "JavaScript";
+langName.language = "ECMAScript";
+console.log(langName.language); // undefined
+```
+
+In this example, we attempted to access the `language` property of the `langName` variable and received a value of `undefined` instead of `'ECMAScript'`.  
+The reason is that the following code creates a String object and assigns a value to the language property.  
+However, the String object with the language property only exists during the execution of this line of code.  
+It’s not recommended to explicitly create primitive wrapper objects like the following:
+
+```js
+let n = new Number(10);
+let s = new String("JS");
+let b = new Boolean(false);
+```
+
+it's worth noting that using reference types can come with a performance cost, as each reference requires additional memory and processing time compared to primitive types.
 
 ## Operators in JS:
 
@@ -66,8 +302,6 @@ We use _operators_ to create _expression_ and with this expressions we can imple
 -   for-in (for iterating an object)
 -   for-of (for iterating an array)
 
----
-
 ## JS Objects
 
 JavaScript is designed on a simple **object-based** paradigm.
@@ -78,7 +312,14 @@ A JavaScript object is a collection of named values.
 
 In JavaScript, an object is a standalone entity, with properties and type.
 
----
+A property name of an object can be any string. You can use quotes around the property name if it is not a valid identifier.
+
+```js
+let person = {
+    firstName: "John",
+    lastName: "Doe",
+};
+```
 
 ### There are different ways to create new objects:
 
@@ -89,19 +330,15 @@ In JavaScript, an object is a standalone entity, with properties and type.
 -   Define an object constructor, and then create objects of the constructed type.
 -   Create an object using `Object.create()`.
 
----
-
 ### Ways to access property of an Object:
 
 -   Dot Notation
 
     `person.name`
 
--   Bracket Notation
+-   Bracket Notation (array-like)
 
     `person["name"]`
-
----
 
 ### Create object using constructor function:
 
@@ -187,8 +424,6 @@ So overally there is two way for object creation:
     -   Function constructor
     -   class
 
----
-
 ## In JS functions are objects.
 
 ```js
@@ -234,16 +469,12 @@ Circle.apply(window, [1]);
 const another = Circle(1);
 ```
 
----
-
 `Object` is a Constructor function but as we know functions are also objects so this constructor function has some property and methods.
 
 -   Object.keys()
 -   Object.entries()
 -   Object.assign()
 -   etc.
-
----
 
 ## Clone an Object
 
@@ -273,8 +504,6 @@ const another = Object.assign({}, circle);
 const another = { ...circle };
 ```
 
----
-
 ## Garbage collector:
 
 **In low level languages like C or C++, when creating an object, we need to allocate memory to it, and when we're done we need to deallocate memory.**
@@ -292,8 +521,6 @@ So you as a JavaScript developer do not have to worry about this.
 Memory allocation and deallocation automatically happens behind the scenes, and you have no control over that. You cannot tell garbage collector when to run and what variables to remove from memory.
 
 So based on some complex algorithms, this garbage collector runs in the background, it figures out what variables are not used, and then it will automatically deallocate their memory.
-
----
 
 ## Arrays
 
@@ -601,8 +828,6 @@ const sum1 = numbers.reduce((accumulator, currentValue) => {
 console.log(sum, sum1);
 ```
 
----
-
 ## Functions
 
 ### Ways to define a function:
@@ -669,8 +894,6 @@ function sum(discount, ...prices) {
 console.log(sum(0.1, 20, 30));
 ```
 
----
-
 ### Getter and Setter:
 
 ```js
@@ -728,8 +951,6 @@ try {
 
 console.log(person);
 ```
-
----
 
 ## The "this" keyword:
 
