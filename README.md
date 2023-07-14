@@ -540,6 +540,8 @@ _One tradeoff though is the global variables declared using var. When declaring 
     -   exponentiation (\*\*)
     -   increment(prefix & postfix) (++)
     -   decrement(prefix & postfix) (--)
+    -   unary plus (+)
+    -   unary minus (-)
 -   Assignment (=)
 -   Comparison
     -   Relational
@@ -556,9 +558,14 @@ _One tradeoff though is the global variables declared using var. When declaring 
             -   loose not equality (!=)
     -   Ternary (condition ? expression : expression)
 -   Logical
+    -   NOT (!)
     -   AND (&&)
     -   OR (||)
-    -   NOT (!)
+    -   Nullish coalesing (??)
+-   Logical Assignment
+    -   ||=
+    -   &&=
+    -   ??=
 -   Bitwise
     -   AND (&)
     -   OR (|)
@@ -567,7 +574,24 @@ We use _operators_ to create _expression_ and with this expressions we can imple
 
 `operators -> expression -> algorithms`
 
-In an arithmetic operation, If one of the operators' values is an object, the JavaScript engine will call the `valueOf()` method of the object to get the value for calculation.  
+In an addition operation, If either value is `string`, the addition operator implicitly converts the numeric value into a string and concatenates two strings.
+
+In an subtraction or multiplication or divide operation, If a value is a string, a boolean, null, or undefined, the JavaScript engine will convert the value to a number using the `Number()` function.
+
+When you apply the unary plus operator to a non-numeric value, it performs a number conversion using the `Number()` function with the rules in the following table:
+
+| Value   | Result                                                                                |
+| ------- | ------------------------------------------------------------------------------------- |
+| boolean | false to 0, true to 1                                                                 |
+| string  | conver the string value based on a set of specific rules                              |
+| object  | call `valueOf()` and/or `toString()` method to get the value to convert into a number |
+
+```js
+let s = "10";
+console.log(+s); // 10
+```
+
+In arithmetic and comparison operations, If one of the operators' values is an object, the JavaScript engine will call the `valueOf()` method of the object to get the value for calculation.  
 For example:
 
 ```js
