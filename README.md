@@ -189,6 +189,172 @@ let s1 = Symbol();
 console.log(Symbol() == Symbol()); // false
 ```
 
+### JS Objects
+
+JavaScript is designed on a simple **object-based** paradigm.
+
+An object is a collection of properties, and a property is an association between a name (or key) and a value. A property's value can be a function, in which case the property is known as a method.
+
+A JavaScript object is a collection of named values.
+
+In JavaScript, an object is a standalone entity, with properties and type.
+
+A property name of an object can be any string. You can use quotes around the property name if it is not a valid identifier.
+
+```js
+let person = {
+    firstName: "John",
+    lastName: "Doe",
+};
+```
+
+#### **Object operations**:
+
+-   Creating an object
+-   Accessing a property
+-   Modifying the value of a property
+-   Adding a property
+-   Deleting a property
+-   Checking existence of a property
+-   toString() and valueOf() methods
+
+#### Creating an object:
+
+There are different ways to create new objects  
+JavaScript provides you with many ways to create an object.
+
+-   using object literal notation (object initializer)  
+    Object initializers are also called object literals `let person = {}`
+-   using Object constructor `const person = new Object()`
+-   Define an object constructor, and then create objects of the constructed type.
+-   Create an object using `Object.create()`
+
+#### Accessing a property:
+
+There are two ways to access a property of an Object
+
+-   Dot Notation
+
+    `person.name`
+
+-   Bracket Notation (array-like)
+
+    `person["name"]`
+
+#### Modifying the value of a property
+
+To change the value of a property, you use the assignment operator (=).
+
+```js
+let person = {
+    firstName: "John",
+    lastName: "Doe",
+};
+
+person.firstName = "Jane";
+```
+
+#### Adding a property
+
+Unlike objects in other programming languages such as Java and C#, you can add a property to an object after object creation.
+
+```js
+let person = {
+    firstName: "John",
+    lastName: "Doe",
+};
+
+person.age = 53;
+```
+
+#### Deleting a property
+
+To delete a property of an object, you use the `delete` operator.
+
+```js
+let person = {
+    firstName: "John",
+    lastName: "Doe",
+};
+
+delete person.firstName;
+```
+
+#### Checking existence of a property
+
+1.  Using `in` operator
+2.  Using `hasOwnProperty` method
+3.  Using `Objects.keys` method
+4.  Using `Object.getOwnPropertyNames` method
+
+1- To check if a property exists in an object, you use the `in` operator.  
+The `in` operator returns true if the property name exists in the object.
+
+2- This method checks if an object has a property with the specified name and returns a boolean value. It does not look up the prototype chain.
+
+```js
+let employee = {
+    firstName: "Peter",
+    lastName: "Doe",
+    employeeId: 1,
+};
+
+console.log("ssn" in employee); // false
+console.log("employeeId" in employee); // true
+
+console.log(employee.hasOwnProperty("firstName")); // true
+console.log(employee.hasOwnProperty("gender")); // false
+
+console.log(Object.keys(employee).includes("firstName")); // true
+console.log(Object.keys(employee).includes("gender")); // false
+
+console.log(Object.getOwnPropertyNames(employee).includes("firstName")); // true
+console.log(Object.getOwnPropertyNames(employee).includes("gender")); // false
+```
+
+#### toString() and valueOf() methods
+
+In JavaScript, `toString()` and `valueOf()` are methods that are available on all objects, including arrays, functions, and custom objects. These methods are used to convert an object into a string or a primitive value, respectively.
+
+##### toString()
+
+The `toString()` method returns a string representation of the object.
+
+By default, the `toString()` method returns the `[object Object]` string for generic objects.
+
+However, many built-in objects override this method to provide a more meaningful string representation. For example, the `toString()` method on an `array` returns a comma-separated string of the array's elements.
+
+```js
+const numbers = [1, 2, 3];
+const numbersString = numbers.toString();
+
+console.log(typeof numbersString); // "string"
+console.log(numbersString); // "1,2,3"
+```
+
+##### valueOf()
+
+The `valueOf()` method returns the primitive value of the object.
+
+By default, the `valueOf()` method returns the object itself.
+
+However, many built-in objects override this method to provide a more meaningful primitive value.  
+For example, the `valueOf()` method on a date object returns the number of milliseconds since the Unix epoch.
+
+```js
+const now = new Date();
+const timestamp = now.valueOf();
+
+console.log(typeof timestamp); // "number"
+console.log(timestamp); // 1626269902910
+```
+
+Note that in many cases, JavaScript will automatically call `toString()` or `valueOf()` on an object when a string or a primitive value is expected.
+
+For example, when concatenating a string with an object, the `toString()` method of the object is called.
+
+When using an object in a mathematical operation, the `valueOf()` method of the object is called.
+
 ## Primitive wrapper types:
 
 JavaScript provides three primitive wrapper types: Boolean, Number, and String types.
@@ -251,6 +417,118 @@ let b = new Boolean(false);
 
 it's worth noting that using reference types can come with a performance cost, as each reference requires additional memory and processing time compared to primitive types.
 
+## Memory Management in JS:
+
+here are many programming languages out there, each having its own characteristics. An essential characteristic of any programming language is how memory efficient it is. The speed of a language depends on how well it handles memory and optimizes at runtime. While memory management differs from programming language, they share common concepts such as **Stack**, **Heap**, etc.
+
+### Memory life cycle in JS:
+
+The memory life cycle defines a JavaScript variable or object’s journey from initialization to removal. JavaScript and all the other programming languages have a similar memory life cycle.
+
+`Initialization -> Accessing -> Removal`
+
+**Initialization** is the creation of the variable.  
+In JavaScript, we do this using the let, const, or var keywords. During this stage, the JavaScript Engine reserves memory for the variables and stores the values inside the allocated memory space.
+
+```js
+let name = "codedamn";
+```
+
+**Accessing** is using the variable. Many times, we’ll also be modifying the values of these variables or objects during this stage.
+
+```js
+if (name === "codedamn") {
+    // Changing the value
+    name = "Codedamn!";
+}
+```
+
+**Removal** is the deallocation of the reserved memory taken up by the variables. After deallocation, we won’t be able to access the variable from our JavaScript code. For example, we cannot access the variables created inside a function.
+
+```js
+function sum() {
+    let x = 10;
+    let y = 20;
+    let sum = x + y;
+}
+
+console.log(x); // This will throw and error!
+```
+
+### Static and Dynamic data:
+
+**Static** or **fixed-size** data is the data whose size is fixed at compile time.
+
+Because static data has a size that does not change, the JavaScript engine allocates a fixed amount of memory space to the static data and store it on the stack.
+
+static data includes:
+
+-   Primitive values (`null`, `undefined`, `boolean`, `number`, `string`, `symbol` and `BigInt`)
+-   Reference values the refer to object
+
+**Dynamic** data is the data whose size is unknown at compile time or may vary at run time.
+
+dynamic data includes objects such as arrays, functions, etc.
+
+### Stack and Heap:
+
+We talked about allocation and deallocation, but the question is that where do these allocations and deallocation happen?
+
+In JavaScript, **stack** and **heap** memory are two different ways of storing and managing data in memory.
+
+When you declare variables, the JavaScript engine allocates the memory for them on two memory locations: stack and heap.
+
+The difference between them is what variables get stored in which type of storage.
+
+#### Stack
+
+The stack is a special region of memory that is used for storing data that is directly related to the execution of a program. This includes function call frames, local variables, and other data related to the execution of a program. The stack is managed by the JavaScript engine and is automatically allocated and deallocated as functions are called and completed.
+
+JavaScript uses the stack data structure to store static or fixed-size data. This includes all numbers, strings, booleans, and other primitive data types. These data types have a fixed size known at compile time. Variables such as objects, arrays, etc., are not stored in the stack as their size varies during run time.
+
+For example, the following declares two variables and initializes their values to a literal string and a number:
+
+```js
+let name = "John";
+let age = 25;
+```
+
+Primitive values are immutable in JavaScript. This means that once a primitive value is created, it cannot be changed.
+
+So when you assign a primitive value from one variable to another, the JavaScript engine creates a copy of that value and assigns it to the variable. For example:
+
+```js
+let age = 25;
+let newAge = age;
+```
+
+#### Heap
+
+The heap is a region of memory that is used for storing complex objects such as arrays and objects. The heap is managed by the JavaScript engine and requires manual memory management. This means that developers need to allocate and deallocate memory for objects on the heap manually using functions such as new and delete.
+
+JavaScript uses a heap for storing variables whose size is unknown at compile time or may vary at the run time, such as objects, arrays, functions, etc.
+
+```js
+let person = {
+    name: "John",
+    age: 25,
+};
+```
+
+### Garbage Collection:
+
+In languages like C, C++, etc., it’s our job to allocate memory and safely deallocate it after use. Therefore, if the memory is not freed up after use, the program will run with an unused allocated memory block. We term this condition a **memory leak**. Therefore, to prevent such conditions, modern programming languages, like JavaScript, come with a Garbage collector.
+
+A Garbage collector is a part of the JavaScript Engine whose job is to free up unused memory from the heap using a garbage collection process. It ensures proper memory management while the application is running. Therefore, the programmer doesn’t have to worry about manual memory management, the garbage collector does it.
+
+It seems pretty straightforward, right? Well, No. There are a lot of challenges to achieving this. There isn’t any algorithm that guarantees that it frees up all the unused memory at the current moment. But, there are algorithms such as the mark and sweep, that perform pretty well and come close to removing most of the unwanted pieces of memory from the heap.
+
+### Mark and Sweep algorithm
+
+It’s one of the most common garbage collection algorithms out there. Basically, it marks the objects not reachable by the root object, i.e., the window object as trash or garbage. Later, the garbage collector removes these marked objects from the heap. Have a look at the example below.
+
+_One tradeoff though is the global variables declared using var. When declaring a variable with var, the JavaScript Engine attaches them to the window object. Now, since these variables are always reachable by window objects, there are never removed by the garbage collector._
+
 ## Operators in JS:
 
 -   Arithmetic
@@ -289,6 +567,52 @@ We use _operators_ to create _expression_ and with this expressions we can imple
 
 `operators -> expression -> algorithms`
 
+In an arithmetic operation, If one of the operators' values is an object, the JavaScript engine will call the `valueOf()` method of the object to get the value for calculation.  
+For example:
+
+```js
+let energy = {
+    valueOf() {
+        return 100;
+    },
+};
+
+let currentEnergy = energy - 10;
+console.log(currentEnergy); // 90
+
+currentEnergy = energy + 100;
+console.log(currentEnergy); // 200
+
+currentEnergy = energy / 2;
+console.log(currentEnergy); // 50
+
+currentEnergy = energy * 1.5;
+console.log(currentEnergy); // 150
+```
+
+If the object doesn’t have the `valueOf()` method but has the `toString()` method, the JavaScript engine will call the `toString()` method to get the value for calculation.  
+For example:
+
+```js
+let energy = {
+    toString() {
+        return 50;
+    },
+};
+
+let currentEnergy = energy - 10;
+console.log(currentEnergy); // 40
+
+currentEnergy = energy + 100;
+console.log(currentEnergy); // 150
+
+currentEnergy = energy / 2;
+console.log(currentEnergy); // 25
+
+currentEnergy = energy * 1.5;
+console.log(currentEnergy); // 75
+```
+
 ## Conditional Statements:
 
 -   if...else
@@ -301,44 +625,6 @@ We use _operators_ to create _expression_ and with this expressions we can imple
 -   do-while
 -   for-in (for iterating an object)
 -   for-of (for iterating an array)
-
-## JS Objects
-
-JavaScript is designed on a simple **object-based** paradigm.
-
-An object is a collection of properties, and a property is an association between a name (or key) and a value. A property's value can be a function, in which case the property is known as a method.
-
-A JavaScript object is a collection of named values.
-
-In JavaScript, an object is a standalone entity, with properties and type.
-
-A property name of an object can be any string. You can use quotes around the property name if it is not a valid identifier.
-
-```js
-let person = {
-    firstName: "John",
-    lastName: "Doe",
-};
-```
-
-### There are different ways to create new objects:
-
--   Create a single object, using an object initializer (object literal).
-    -   Object initializers are also called object literals
--   Create a single object, with the keyword new.
-    -   `const person = new Object();`
--   Define an object constructor, and then create objects of the constructed type.
--   Create an object using `Object.create()`.
-
-### Ways to access property of an Object:
-
--   Dot Notation
-
-    `person.name`
-
--   Bracket Notation (array-like)
-
-    `person["name"]`
 
 ### Create object using constructor function:
 
@@ -504,28 +790,18 @@ const another = Object.assign({}, circle);
 const another = { ...circle };
 ```
 
-## Garbage collector:
-
-**In low level languages like C or C++, when creating an object, we need to allocate memory to it, and when we're done we need to deallocate memory.**
-
-But in JavaScript, we don't have this concept. We can easily create the new object,
-
-at the time we initialized this object, the memory is automatically allocated to this object, next we can use that, and when we are done using, we don't need to deallocate the memory.
-
-So, our JavaScript engine has what we call a **garbage collector**.
-
-_The job of this garbage collector is to find the variables or constants that are no longer used and then deallocate the memory that was allocated to them earlier_.
-
-So you as a JavaScript developer do not have to worry about this.
-
-Memory allocation and deallocation automatically happens behind the scenes, and you have no control over that. You cannot tell garbage collector when to run and what variables to remove from memory.
-
-So based on some complex algorithms, this garbage collector runs in the background, it figures out what variables are not used, and then it will automatically deallocate their memory.
-
 ## Arrays
+
+In JavaScript, an array is an ordered list of values. Each value is called an element specified by an index.
+
+A JavaScript array has the following characteristics
+
+-   An Array can hold values fo mixed types
+-   The size of an array is dynamic and auto-growing
 
 ### Array operations:
 
+-   Creating an Array
 -   Adding Elements (+)
 -   Removing Elements (❌ -)
 -   Finding Elements (📌 ?)
@@ -537,6 +813,22 @@ So based on some complex algorithms, this garbage collector runs in the backgrou
 -   Filtering Elements
 -   Mapping an Array
 -   Reducing an Array
+
+### Creating an Array:
+
+-   using `Array` constructor
+
+```js
+let scores = new Array();
+```
+
+You can create an array with or without `new` keyword because when `Array` is called as a `function` rather than as a `constructor`, it _creates_ and _initialises_ a new Array object. Thus the function call `Array(...)` is equivalent to the object creation expression `new Array(...)` with the same arguments.
+
+-   using array literal notation
+
+```js
+let colors = ["Red", "Green", "Blue"];
+```
 
 #### Adding Elements:
 
