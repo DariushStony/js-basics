@@ -566,6 +566,8 @@ _One tradeoff though is the global variables declared using var. When declaring 
     -   ||=
     -   &&=
     -   ??=
+-   Spread (...)
+-   Comma (,)
 -   Bitwise
     -   AND (&)
     -   OR (|)
@@ -573,6 +575,13 @@ _One tradeoff though is the global variables declared using var. When declaring 
 We use _operators_ to create _expression_ and with this expressions we can implement _algorithms_.
 
 `operators -> expression -> algorithms`
+
+JavaScript uses a comma (,) to represent the comma operator. A comma operator takes two expressions, evaluates them from left to right, and returns the value of the right expression.
+
+```js
+let result = (10, 10 + 20);
+console.log(result); // 30
+```
 
 In an addition operation, If either value is `string`, the addition operator implicitly converts the numeric value into a string and concatenates two strings.
 
@@ -642,13 +651,147 @@ console.log(currentEnergy); // 75
 -   if...else
 -   switch...case
 
+switch statement uses strict comparison (===).
+
 ## Loops:
 
--   for
 -   while
 -   do-while
+-   for
 -   for-in (for iterating an object)
 -   for-of (for iterating an array)
+
+The `while` statement evaluates the expression before each iteration of the loop.  
+Because the while loop evaluates the expression before each iteration, it is known as a **pretest** loop.
+
+Because the do...while loop evaluates expression after each iteration, it’s often referred to as a **post-test** loop.
+
+```js
+for (initializer; condition; iterator) {
+    // statements
+}
+```
+
+## Functions
+
+### Ways to define a function:
+
+-   Function Declaration
+
+    we can call it before it is defined
+
+-   Function Expression
+    -   Named Function Expression
+    -   Anonymouse Function Expression
+
+```js
+// Function Declaration
+function walk() {
+    console.log("walk");
+}
+```
+
+```js
+// Named Function Expression
+const run = function something() {
+    console.log("run");
+};
+
+// Anonymous Function Expression
+const move = function () {
+    console.log("move");
+};
+```
+
+### Types of functions
+
+-   Regular functions
+-   Arrow functions
+
+ES6 introduced arrow function expressions that provide a shorthand for declaring anonymous functions.
+
+```js
+let show = function () {
+    console.log("Anonymous function");
+};
+
+// can be shortened using the following arrow function:
+let show = () => console.log("Anonymous function");
+```
+
+### Functions actions
+
+-   Declaring a function
+
+```js
+function functionName(parameters) {
+    // function body
+    // ...
+}
+```
+
+-   Calling a function
+
+```js
+functionName(arguments);
+```
+
+Every function in JavaScript implicitly returns undefined unless you explicitly specify a return value.
+
+### Functions are First-Class citizens
+
+Functions are first-class citizens in JavaScript. In other words, you can treat functions like values of other types.  
+This means that you can store functions in variables, pass them to other functions as arguments, and return them from other functions as values.
+
+-   Storing functions in vairables
+-   Passing a function to another function
+-   Returning functions from functions
+
+```js
+function add(a, b) {
+    return a + b;
+}
+
+let sum = add;
+
+function average(a, b, fn) {
+    return fn(a, b) / 2;
+}
+
+let result = average(10, 20, sum);
+
+console.log(result);
+```
+
+### Passing arguments mechanism
+
+-   Pass-by-Value
+-   Pass-by-Reference
+
+In JavaScript, all function arguments are always passed by value. It means that JavaScript copies the values of the variables into the function arguments.
+
+### arguments object
+
+Inside a function, you can access an object called `arguments` that represents the named arguments of the function.
+
+The `arguments` object behaves like an array (array-like) though it is not an instance of the Array type.
+
+For example, you can use the square bracket `[]` to access the arguments: `arguments[0]` returns the first argument, `arguments[1]` returns the second one, and so on.
+
+Also, you can use the `length` property of the arguments object to determine the number of arguments.
+
+```js
+function add() {
+    let sum = 0;
+    for (let i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+}
+
+console.log(add(1, 2)); // 3
+console.log(add(1, 2, 3, 4, 5)); // 15
+```
 
 ### Create object using constructor function:
 
@@ -1142,55 +1285,6 @@ const sum1 = numbers.reduce((accumulator, currentValue) => {
 });
 
 console.log(sum, sum1);
-```
-
-## Functions
-
-### Ways to define a function:
-
--   Function Declaration
-
-    we can call it before it is defined
-
--   Function Expression
-    -   Named Function Expression
-    -   Anonymouse Function Expression
-
-```js
-// Function Declaration
-function walk() {
-    console.log("walk");
-}
-```
-
-```js
-// Named Function Expression
-const run = function something() {
-    console.log("run");
-};
-
-// Anonymous Function Expression
-const move = function () {
-    console.log("move");
-};
-```
-
----
-
-Every Functions in JavaScript has a special object called **arguments**.
-It's kind of looks like an array, but it's not an array, it's an object.
-
-```js
-function sum() {
-    let total = 0;
-    for (let value of arguments) total += value;
-
-    return total;
-    // console.log(arguments);
-    // return a + b;
-}
-
-console.log(sum(1, 2, 3));
 ```
 
 ### Rest operator:
